@@ -9,10 +9,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -59,6 +61,7 @@ public class StepDefinitions {
 
     @Then("car_output.txt should contain reg plates and details")
     public void then() {
+        List<String> errors = new ArrayList<>();
         File expectedFile = new File("car_sample.txt");
         try {
             Scanner readExpected = new Scanner(expectedFile);
@@ -71,9 +74,16 @@ public class StepDefinitions {
                 try {
                     assertEquals(readExpectedIn, readActualIn);
                 }
-                catch (Exception e5){
-                    logger.log(logger.getLevel(), "expected: " + readExpectedIn + " but was: " + readActualIn);
+                catch (Throwable t){
+                    errors.add("expected: " + readExpectedIn + " but was: " + readActualIn);
+//                    logger.info("expected: " + readExpectedIn + " but was: " + readActualIn);
                 }
+            }
+            if(errors.size() > 0) {
+                for(String s: errors) {
+                    logger.severe(s);
+                }
+                fail(errors.toString());
             }
         }
         catch (FileNotFoundException e4) {
