@@ -3,6 +3,6 @@
 To Do:
 
 - Recognise reg plates with spaces
-- Highlight differences instead of throw out
+- Don't throw out on first error
 - Allow multiple input files
 - Change to more object oriented programming
