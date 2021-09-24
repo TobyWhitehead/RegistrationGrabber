@@ -32,8 +32,12 @@ public class EnterRegGrabDetails {
         driver.findElement(By.cssSelector(".jsx-1164392954")).click();
         js.executeScript("window.scrollTo(0,297)");
         js.executeScript("window.scrollTo(0,1000)");
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
+        try {
+            Thread.sleep(2000);
+        }
+        catch(InterruptedException e7) {
+            e7.printStackTrace();
+        }
         {
             WebElement element = driver.findElement(By.xpath("//dl[2]/dd"));
             String make = element.getText();

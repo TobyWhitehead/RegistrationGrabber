@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.List;
+import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,6 +22,14 @@ public class StepDefinitions {
 
     @Given("car_input.txt contains {word}, {word} and {word}")
     public void given(String arg0, String arg1, String arg2) {
+        try
+        {
+            FileHandler fileHandler = new FileHandler("error.log");
+            logger.addHandler(fileHandler);
+        }
+        catch(Exception e6) {
+            e6.printStackTrace();
+        }
         try {
             File outputFile = new File("car_input.txt");
             if (outputFile.createNewFile()) {
@@ -60,10 +69,10 @@ public class StepDefinitions {
                 String readExpectedIn = readExpected.nextLine();
                 String readActualIn = readActual.nextLine();
                 try {
-                    assertEquals(readExpectedIn, readActualIn, "failed, expected: " + readExpectedIn + "actual: " + readActualIn);
+                    assertEquals(readExpectedIn, readActualIn);
                 }
                 catch (Exception e5){
-                    logger.fine("failed, expected: " + readExpectedIn + "actual: " + readActualIn);
+                    logger.log(logger.getLevel(), "expected: " + readExpectedIn + " but was: " + readActualIn);
                 }
             }
         }

@@ -29,8 +29,6 @@ public class RegistrationGrab {
                 }
                 for(String word : words) {
                     if(word.length() == 7 && isStringUpperCase(word)) {
-                        System.out.println("word");
-                        System.out.println(word);
                         regNumbers.add(word);
                     }
                 }
