@@ -6,13 +6,13 @@ Feature: RegGrab
     When I run RegistrationGrab.java
     Then car_output.txt should contain reg plates and details
 
-#    Given car_input.txt contains blah blah blah
-#    When I run grabRegistration
-#    Then should return blah blah blah
-#
-#    Given grabRegistration returned blah blah blah
-#    When I run getData
-#    Then should return List of data
+    Given car_input.txt has SG18HTN, DN09HRM and BW57BOF
+    When I run grabRegistration
+    Then should return SG18HTN, DN09HRM and BW57BOF
+
+    Given grabRegistration returned SG18HTN, DN09HRM and BW57BOF
+    When I run getData
+    Then should return list of data
 #
 #    Given getData returned blah blah blah
 #    When I run getOutput
